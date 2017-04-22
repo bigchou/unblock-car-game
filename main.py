@@ -1,12 +1,25 @@
 from board import Board
-from iddfs import iddfs
+from iddfs import iddfs,iddfs2
 import datetime as dt
+
+"""
+board = Board( [[2,3,4],
+				[0,0,5],
+				[1,1,6]])
+"""
+
 
 """
 board = Board( [[2,3,4],
 				[1,1,5],
 				[0,0,6]])
 """
+
+
+board = Board( [[0,2,3],
+				[1,1,4],
+				[0,6,5]])
+
 
 """
 board = Board( [[0,2,3],
@@ -15,10 +28,11 @@ board = Board( [[0,2,3],
 """
 
 
-
+"""
 board = Board( [[6,1,1],
 				[0,2,3],
 				[0,4,5]])
+"""
 
 
 
@@ -78,7 +92,6 @@ board = Board( [[2,1,1,0],
 """
 
 start = dt.datetime.now()
-iddfs(board)
-
+iddfs2(board)
 end = dt.datetime.now()
 print(end-start)

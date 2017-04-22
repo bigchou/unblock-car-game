@@ -39,20 +39,6 @@ class Board:
 	def is_goal(self):
 		height = self.height()
 		width = self.width()
-		"""
-		goal = [[0,1,2],
-				[3,4,5],
-				[6,7,8]];
-		flag = True;
-		for i in range(3):
-			for j in range(3):
-				if(self.tiles[i][j] != goal[i][j]):
-					flag = False
-					break
-			if(flag==False):
-				break
-		return flag
-		"""
 		return (self.tiles[height-1][0] == 1 and self.tiles[height-1][1] == 1)
 
 	
@@ -369,8 +355,6 @@ class Board:
 					swapped_tiles[goal_y-2][goal_x+1] = 0
 					result.append(Board(swapped_tiles, self.moves + 1))
 
-			
-
-
-
 		return result
+
+		
