@@ -2,26 +2,6 @@ from board import Board
 from iddfs import iddfs
 import datetime as dt
 
-
-"""
-board = Board( [[2,1,1],
-				[0,3,4],
-				[0,5,6]])
-"""
-
-
-"""
-board = Board( [[3,1,2],
-				[4,0,5],
-				[6,7,8]])
-"""
-
-"""
-board = Board( [[7,2,4],
-				[5,0,6],
-				[8,3,1]])
-"""
-
 """
 board = Board( [[2,3,4],
 				[1,1,5],

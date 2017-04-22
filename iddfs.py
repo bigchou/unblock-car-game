@@ -16,7 +16,7 @@ def iddfs(root_node):
 				return
 			if node.moves < depth:
 				tmp = []
-				for child in node.legal_moves2():
+				for child in node.possible_moves():
 					if child.tilehash() not in visited or visited[child.tilehash()] > child.moves:
 						tmp.append(child)
 				queue.extend(tmp)

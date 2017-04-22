@@ -56,7 +56,7 @@ class Board:
 		return (self.tiles[height-1][0] == 1 and self.tiles[height-1][1] == 1)
 
 	
-	def legal_moves2(self):
+	def possible_moves(self):
 		height = self.height()
 		width = self.width()
 		freq_table = self.getFrequency()
@@ -373,52 +373,4 @@ class Board:
 
 
 
-		return result
-
-
-
-		
-	
-
-	def legal_moves(self):
-		# find empty
-		goal_y = 0;
-		goal_x = 0;
-		for i in range(3):
-			for j in range(3):
-				if(self.tiles[i][j] == 0):
-					goal_y = i
-					goal_x = j
-		# new coord after moving
-		arr = []
-		for coord in [(0,1),(1,0),(0,-1),(-1,0)]:
-			arr.append((goal_y+coord[0],goal_x+coord[1]))
-		# filter the legal one
-		arr2 = []
-		for coord in arr:
-			if(coord[0] >= 0 and coord[1] >= 0 and coord[0] < 3 and coord[1] < 3):
-				arr2.append(coord)
-		return set(arr2) # remove the duplicate value
-
-
-
-	def children(self):
-		result = []
-		for mo in self.legal_moves():
-			goal_y = 0;
-			goal_x = 0;
-			for i in range(3):
-				for j in range(3):
-					if(self.tiles[i][j] == 0):
-						goal_y = i
-						goal_x = j
-			old_empty = (goal_y,goal_x)
-			swapped_tiles = np.copy(self.tiles)
-			# Replace empty tile with target tile.
-			coord = mo;
-			swapped_tiles[old_empty[0]][old_empty[1]] = self.tiles[coord[0]][coord[1]]
-			# Replace target tile with empty tile.
-			swapped_tiles[coord[0]][coord[1]] = 0
-
-			result.append(Board(swapped_tiles, self.moves + 1))
 		return result
