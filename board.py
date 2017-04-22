@@ -357,4 +357,3 @@ class Board:
 
 		return result
 
-		

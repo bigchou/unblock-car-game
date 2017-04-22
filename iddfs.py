@@ -7,13 +7,14 @@ def iddfs(root_node):
 		queue = [root_node]
 		visited = {}
 		while len(queue) > 0:
-			node = queue.pop()
+			node = queue.pop() # get element from tail
 			visited[node.tilehash()] = node.moves
 			if node.is_goal():
 				print("RESULT:")
 				print(node.tiles)
 				print(node.moves)
 				return
+
 			if node.moves < depth:
 				tmp = []
 				for child in node.possible_moves():
@@ -24,37 +25,34 @@ def iddfs(root_node):
 
 	return
 
-def dfs(node,deep,limit,visited):
+def dfs(node,limit,visited):
+	visited[node.tilehash()] = node.moves
 	if(node.is_goal()):
 		print("RESULT:")
 		print(node.tiles)
 		print(node.moves)
 		return node
 
-	tmp = node.possible_moves()
 	new_node_list = []
-	for i in tmp:
-		if i not in visited:
-			visited.append(i)
-			obj_node = i
-			new_node_list.append(obj_node)
+	if node.moves < limit:
+		for child in node.possible_moves():
+			if child not in visited or visited[child.tilehash()] > child.moves:
+				new_node_list.append(child)
 
-	while new_node_list and deep < limit:
-		parent = new_node_list.pop(0)
-		ret = dfs(parent,deep+1,limit,visited)
+
+	while new_node_list:
+		parent = new_node_list.pop() # get element from tail
+		ret = dfs(parent,limit,visited)
 		if ret:
 			if ret.is_goal():
 				return ret
 	return None
 
+
 def iddfs2(root_node):
-	limit = 0
-	ret = None
-	while True:
-		print(limit)
-		visited = []
-		ret = dfs(root_node,0,limit,visited)
-		limit += 1
-		if ret:
+	for depth in itertools.count(): 
+		print(depth)
+		visited = {}
+		if dfs(root_node,depth,visited):
 			break
-	return ret
+	return
