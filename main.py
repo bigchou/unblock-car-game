@@ -1,5 +1,6 @@
 from board import Board
 from iddfs import iddfs,iddfs2
+from idastar import idastar
 import datetime as dt
 
 """
@@ -108,7 +109,10 @@ board = Board( [[2,1,1,0],
 				[8,7,9,9]])
 """
 
+
+
 start = dt.datetime.now()
-iddfs2(board)
+idastar(board)
+#iddfs(board)
 end = dt.datetime.now()
 print(end-start)

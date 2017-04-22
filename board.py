@@ -9,6 +9,8 @@ class Board:
 		self.tiles = np.array(tiles, dtype=np.int8)
 		#print(self.tiles)
 		#print("")
+		self.cost = None # usage for idastar
+		self.total_cost = None # usage for idastar 
 		self.moves = moves
 		self.tiles.flags.writeable = False
 
