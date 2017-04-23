@@ -1,5 +1,10 @@
+# https://algorithmsinsight.wordpress.com/graph-theory-2/ida-star-algorithm-in-general/
+# https://gist.github.com/delijati/1629405
+# https://github.com/rjoonas/AI-assignment-1
+# http://stackoverflow.com/questions/33056358/python-8-puzzle-iddfs-with-results-greater-than-bfs
 
-FINFINITY = 5000
+
+FINFINITY = 999999
 
 num_nodes = 0
 
@@ -36,12 +41,13 @@ def heuristic_manhattan(node):
 	return value	
 
 
-def dfs_heuristic_rec(node,limit,depth):
+def search(node,threshold,depth,visited):
+	#visited[node.tilehash()] = node.moves
 	global num_nodes
 	num_nodes+=1
 	depth += 1
 	#print("1")
-	if(node.total_cost > limit):
+	if(node.total_cost > threshold):
 		#print("2")
 		return node, node.total_cost
 	if(node.is_goal()):
@@ -49,6 +55,18 @@ def dfs_heuristic_rec(node,limit,depth):
 		return node, node.total_cost
 	tmp = node.possible_moves()
 	minimum = FINFINITY
+
+	"""
+	new_node_list = []
+	if node.moves < limit:
+		for child in tmp:
+			if child not in visited or visited[child.tilehash()] > child.moves:
+				new_node_list.append(child)
+			else:
+				print("??????")
+	"""
+
+
 	for child in tmp:
 		#print("4")
 		#print(child.tiles)
@@ -57,7 +75,7 @@ def dfs_heuristic_rec(node,limit,depth):
 		child.total_cost = child.cost + node.total_cost
 		
 
-		ret, newlimit = dfs_heuristic_rec(child,limit,depth)
+		ret, newlimit = search(child,threshold,depth,visited)
 
 		if(ret.is_goal()):
 			#print("5")
@@ -70,27 +88,55 @@ def dfs_heuristic_rec(node,limit,depth):
 
 
 
+def search2(node,g,threshold):
+	global num_nodes
+	num_nodes += 1
+	f = g+heuristic_manhattan(node)
+	if(f > threshold):
+		return node, f
+	if(node.is_goal()):
+		return node, f
+	minimum = FINFINITY
+	for child in node.possible_moves():
+		child.cost = heuristic_manhattan(child)
+		child.total_cost = child.cost + node.total_cost
+		ret, temp = search2(child,child.total_cost,threshold)
+		if(ret.is_goal()):
+			return ret, ret.total_cost
+		if(temp < minimum):
+			minimum = temp
+	return node, minimum
+
 
 def idastar(root_node):
+	print("="*10+"IDASTAR"+"="*10)
+	global num_nodes
+	num_nodes = 0
 	#print(heuristic_misplaced(root_node))
 	#print(heuristic_manhattan(root_node))
 	root_node.cost = heuristic_manhattan(root_node)
 	#root_node.cost = heuristic_nothing(root_node)
 	root_node.total_cost = 0
-	limit = root_node.cost
-	loops = 0
+	threshold = root_node.cost
+	#loops = 0
 	node = None
 	depth = 0
-	while limit < FINFINITY:
-		loops += 1
-		node, tmp_limit = dfs_heuristic_rec(root_node,limit,depth)
-		limit = tmp_limit + 1
+	while True:
+		#print(loops)
+		#loops += 1
+		#visited = {}
+		#node, tmp_limit = search(root_node,threshold,depth,visited)
+		node, temp = search2(root_node,0,threshold)
+		#threshold = tmp_limit + 1
 		if(node.is_goal()):
 			print("RESULT:")
 			print(node.tiles)
 			print(node.moves)
 			print(num_nodes)
 			break
+		if(temp == FINFINITY):
+			break
+		threshold = temp # delete it !!!!!
 	return
 
 

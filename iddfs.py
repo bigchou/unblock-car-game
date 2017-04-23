@@ -6,6 +6,7 @@ num_nodes = 0
 def iddfs(root_node):
 	print("="*10+"IDDFS"+"="*10)
 	global num_nodes
+	num_nodes = 0
 	#return
 	for depth in itertools.count(): 
 		queue = [root_node]
@@ -61,6 +62,9 @@ def dfs(node,limit,visited):
 
 
 def iddfs2(root_node):
+	print("="*10+"IDDFS2"+"="*10)
+	global num_nodes
+	num_nodes = 0
 	for depth in itertools.count(): 
 		#print(depth)
 		visited = {}
