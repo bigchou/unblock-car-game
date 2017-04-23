@@ -1,7 +1,11 @@
 import itertools
 
+num_nodes = 0
+
+
 def iddfs(root_node):
 	print("="*10+"IDDFS"+"="*10)
+	global num_nodes
 	#return
 	for depth in itertools.count(): 
 		queue = [root_node]
@@ -9,10 +13,12 @@ def iddfs(root_node):
 		while len(queue) > 0:
 			node = queue.pop() # get element from tail
 			visited[node.tilehash()] = node.moves
+			num_nodes+=1
 			if node.is_goal():
 				print("RESULT:")
 				print(node.tiles)
 				print(node.moves)
+				print(num_nodes)
 				return
 
 			if node.moves < depth:
@@ -27,10 +33,13 @@ def iddfs(root_node):
 
 def dfs(node,limit,visited):
 	visited[node.tilehash()] = node.moves
+	global num_nodes
+	num_nodes += 1
 	if(node.is_goal()):
 		print("RESULT:")
 		print(node.tiles)
 		print(node.moves)
+		print(num_nodes)
 		return node
 
 	new_node_list = []
@@ -49,9 +58,11 @@ def dfs(node,limit,visited):
 	return None
 
 
+
+
 def iddfs2(root_node):
 	for depth in itertools.count(): 
-		print(depth)
+		#print(depth)
 		visited = {}
 		if dfs(root_node,depth,visited):
 			break

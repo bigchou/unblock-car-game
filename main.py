@@ -17,16 +17,23 @@ board = Board( [[2,3,4],
 """
 
 """
+board = Board( [[2,3,4],
+				[1,1,5],
+				[0,6,0]])
+"""
+
+"""
 board = Board( [[2,3,0],
 				[1,1,4],
 				[0,6,5]])
 """
 
-"""
+
+
 board = Board( [[0,2,3],
 				[1,1,4],
 				[0,6,5]])
-"""
+
 
 """
 board = Board( [[0,2,3],
@@ -40,10 +47,12 @@ board = Board( [[0,3,0],
 				[4,5,6]])
 """
 
+
+"""
 board = Board( [[2,0,0],
 				[3,1,1],
 				[4,5,6]])
-
+"""
 
 
 """
@@ -51,7 +60,6 @@ board = Board( [[6,1,1],
 				[0,2,3],
 				[0,4,5]])
 """
-
 
 
 """
@@ -113,6 +121,6 @@ board = Board( [[2,1,1,0],
 
 start = dt.datetime.now()
 idastar(board)
-#iddfs(board)
+#iddfs2(board)
 end = dt.datetime.now()
 print(end-start)
