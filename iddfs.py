@@ -9,6 +9,7 @@ def iddfs(root_node):
 	num_nodes = 0
 	#return
 	for depth in itertools.count(): 
+		
 		queue = [root_node]
 		visited = {}
 		while len(queue) > 0:
@@ -20,6 +21,7 @@ def iddfs(root_node):
 				print(node.tiles)
 				print(node.moves)
 				print(num_nodes)
+				print(node.parent)
 				return
 
 			if node.moves < depth:
