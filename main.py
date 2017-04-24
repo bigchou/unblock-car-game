@@ -5,6 +5,32 @@ from idastar import idastar
 import datetime as dt
 
 """
+from hashlib import sha1
+import numpy as np
+def a(i,c):
+	d = np.copy(c)
+	print(sha1(c).hexdigest())
+	if(i<=1):
+		return 1
+	else:
+		return i * a(i-1,d)
+	
+	
+	
+def b():
+	c = [[1,2,3],[4,5,6],[7,8,9]]
+	c = np.array(c, dtype=np.int8)
+	print(sha1(c).hexdigest())
+
+c = [[1,2,3],[4,5,6],[7,8,9]]
+c = np.array(c, dtype=np.int8)
+	
+a(5,c)
+exit(0)
+"""
+
+
+"""
 board = Board2( [[2,3,4],
 				[0,0,5],
 				[1,1,6]] , None)
@@ -17,24 +43,41 @@ board = Board2( [[2,3,4],
 				[0,0,6]])
 """
 
+"""
+board = Board2( [[2,2,2],
+				[1,1,2],
+				[0,0,2]],[None])
+"""
 
 
 """
-board = Board2( [[2,3,4],
+board = Board( [[2,3,4],
 				[1,1,5],
-				[0,6,0]], None)
+				[0,6,0]])
 """
+
+
 
 """
 board = Board2( [[2,3,0],
 				[1,1,4],
 				[0,6,5]])
 """
+
+
+
 """
 board = Board2( [[0,2,2],
 				[1,1,2],
 				[0,2,2]])
 """
+
+"""
+board = Board2( [[0,2,2],
+				[1,1,2],
+				[0,2,2]],[None])
+"""
+
 """
 board = Board2( [[0,2,3],
 				[1,1,4],
@@ -62,6 +105,12 @@ board = Board( [[0,2,3],
 """
 board = Board2( [[0,2,2],
 				[0,1,1],
+				[2,2,2]], [None])
+"""
+
+"""
+board = Board2( [[0,2,2],
+				[0,1,1],
 				[2,2,2]])
 """
 
@@ -71,6 +120,17 @@ board = Board( [[0,3,0],
 				[4,5,6]])
 """
 
+"""
+board = Board2( [[0,2,0],
+				[2,1,1],
+				[2,2,2]], [None])
+"""
+
+"""
+board = Board2( [[2,1,1],
+				[2,2,0],
+				[0,2,2]], [None])
+"""
 
 """
 board = Board( [[2,0,0],
@@ -90,7 +150,6 @@ board = Board2( [[2,1,1],
 				[0,2,2],
 				[0,2,2]],[None])
 """
-
 
 """
 board = Board( [[0,2,1,1],
@@ -186,24 +245,23 @@ board = Board( [[2,1,1,0],
 				[8,7,9,9]])
 """
 
+
 board = Board2( [[2,3,5,5],
 				[2,3,5,5],
 				[0,2,4,4],
 				[2,0,2,2]],[None])
 
 
+
+
+
+
 start = dt.datetime.now()
-iddfs(board)
+idastar(board)
 end = dt.datetime.now()
 print(end-start)
-
 
 """
-start = dt.datetime.now()
-iddfs(board)
-end = dt.datetime.now()
-print(end-start)
-
 start = dt.datetime.now()
 idastar(board)
 end = dt.datetime.now()

@@ -1,7 +1,7 @@
 import itertools
 
 num_nodes = 0
-
+visited = {}
 
 def iddfs(root_node):
 	print("="*10+"IDDFS"+"="*10)
@@ -34,9 +34,10 @@ def iddfs(root_node):
 
 	return
 
-def dfs(node,limit,visited):
-	visited[node.tilehash()] = node.moves
+def dfs(node,limit):
+	global visited
 	global num_nodes
+	visited[node.tilehash()] = node.moves
 	num_nodes += 1
 	if(node.is_goal()):
 		print("RESULT:")
@@ -50,11 +51,13 @@ def dfs(node,limit,visited):
 		for child in node.possible_moves():
 			if child not in visited or visited[child.tilehash()] > child.moves:
 				new_node_list.append(child)
-
-
+			else:
+				print('here')
+#sdfsfsffs
 	while new_node_list:
 		parent = new_node_list.pop() # get element from tail
-		ret = dfs(parent,limit,visited)
+		ret = dfs(parent,limit)
+		visited[node.tilehash()] = node.moves
 		if ret:
 			if ret.is_goal():
 				return ret
@@ -70,6 +73,6 @@ def iddfs2(root_node):
 	for depth in itertools.count(): 
 		#print(depth)
 		visited = {}
-		if dfs(root_node,depth,visited):
+		if dfs(root_node,depth):
 			break
 	return
