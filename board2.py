@@ -46,8 +46,8 @@ class Board2:
 
 		# Record Parent
 		node = []
-		node.extend(self.parent)
-		node.append(self.tiles)
+		#node.extend(self.parent)
+		#node.append(self.tiles)
 		#print(node)
 		
 

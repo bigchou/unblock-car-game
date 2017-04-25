@@ -1,4 +1,5 @@
-from board import Board
+import sys
+#from board import Board
 from board2 import Board2
 from iddfs import iddfs,iddfs2
 from idastar import idastar
@@ -245,21 +246,58 @@ board = Board( [[2,1,1,0],
 				[8,7,9,9]])
 """
 
-
+"""
 board = Board2( [[2,3,5,5],
 				[2,3,5,5],
 				[0,2,4,4],
 				[2,0,2,2]],[None])
+"""
+print("Enter the name of the test file: ")
+filename = str(sys.stdin.readline())
+filename = filename.rstrip('\n')
+inputboard = []
+with open(filename) as f:
+	for row in f:
+		row = [ int(x) for x in row.split()]
+		inputboard.append(row)
+print("board is loaded!")
+# readfile
+while(True):
+	board = Board2(inputboard,[None])
+	print("(1) IDDFS")
+	print("(2) FAST IDDFS")
+	print("(3) IDASTAR")
+	print("Choose your input(enter -1 to exit): ")
+	option = int(sys.stdin.readline())
+	if(option == -1):
+		exit(0)
+	elif(option == 1):
+		start = dt.datetime.now()
+		iddfs2(board)
+		end = dt.datetime.now()
+		print(end-start)
+	elif(option == 2):
+		start = dt.datetime.now()
+		iddfs(board)
+		end = dt.datetime.now()
+		print(end-start)
+	elif(option == 3):
+		start = dt.datetime.now()
+		idastar(board)
+		end = dt.datetime.now()
+		print(end-start)
+	else:
+		print("Invalid Input, Try Again... ")
+	print("\n\n")
 
 
 
 
-
-
-start = dt.datetime.now()
-idastar(board)
-end = dt.datetime.now()
-print(end-start)
+	
+#iddfs(board)
+#idastar(board)
+	
+#print(end-start)
 
 """
 start = dt.datetime.now()

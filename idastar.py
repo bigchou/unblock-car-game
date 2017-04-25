@@ -172,7 +172,9 @@ def idastar(root_node):
 		if(node.is_goal()):
 			print("RESULT:")
 			print(node.tiles)
+			print("Total Moves:")
 			print(node.moves)
+			print("Total Nodes IDASTAR Traverse:")
 			print(num_nodes)
 			break
 		if(temp == FINFINITY):
