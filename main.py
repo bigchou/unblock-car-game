@@ -31,6 +31,36 @@ exit(0)
 """
 
 
+
+"""
+board = Board2( [[2,2,2],
+				[1,1,2],
+				[0,2,0]],[None])
+"""
+"""
+board = Board2( [[2,1,1],
+				[0,2,2],
+				[0,2,2]],[None])
+
+board = Board2( [[2,3,5,5],
+				[2,3,5,5],
+				[0,2,4,4],
+				[2,0,2,2]],[None])
+
+board = Board2( [[0,3,1,1],
+				[0,3,2,2],
+				[4,4,2,2]],[None])
+"""
+"""
+start = dt.datetime.now()
+iddfs2(board)
+#idastar(board)
+end = dt.datetime.now()
+print(end-start)
+
+
+exit(0)
+"""
 """
 board = Board2( [[2,3,4],
 				[0,0,5],
@@ -264,8 +294,8 @@ print("board is loaded!")
 # readfile
 while(True):
 	board = Board2(inputboard,[None])
-	print("(1) IDDFS")
-	print("(2) FAST IDDFS")
+	print("(1) IDDFS (RECURSION)")
+	print("(2) IDDFS (QUEUE)")
 	print("(3) IDASTAR")
 	print("Choose your input(enter -1 to exit): ")
 	option = int(sys.stdin.readline())

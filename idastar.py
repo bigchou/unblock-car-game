@@ -129,7 +129,7 @@ def search2(node,g,threshold):
 	minimum = FINFINITY
 	for child in node.possible_moves():
 		if child.tilehash() not in visited or visited[child.tilehash()] > child.moves:
-			visited[node.tilehash()] = node.moves
+			#visited[node.tilehash()] = node.moves
 			#child.cost = heuristic_misplaced(child)
 			child.cost = heuristic_manhattan(child)
 			child.total_cost = child.cost + node.total_cost

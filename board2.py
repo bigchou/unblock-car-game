@@ -138,11 +138,15 @@ class Board2:
 						result.append(Board2(swapped_tiles, node,self.moves + 1))
 
 		# one zero
+		#print(goal_y)
+		#print(goal_x)
+		#print('****')
 		arr = []
 		for coord in [(0,1),(1,0),(0,-1),(-1,0)]:
 			if(goal_y+coord[0] >= 0 and goal_x+coord[1] >= 0 and goal_y+coord[0] < height and goal_x+coord[1] < width): # check legal or not
 				if(self.tiles[goal_y+coord[0]][goal_x+coord[1]] == 2):
 					arr.append((goal_y+coord[0],goal_x+coord[1]))
+		#print(set(arr))
 		for coord in set(arr):
 			swapped_tiles = np.copy(self.tiles)
 			swapped_tiles[goal_y][goal_x] = self.tiles[coord[0]][coord[1]]
@@ -185,6 +189,8 @@ class Board2:
 			if(goal_y+coord[0] >= 0 and goal_x+coord[1] >= 0 and goal_y+coord[0] < height and goal_x+coord[1] < width): # check legal or not
 				if(self.tiles[goal_y+coord[0]][goal_x+coord[1]] == 2):
 					arr.append((goal_y+coord[0],goal_x+coord[1]))
+		#print('***')
+		#print(set(arr))
 		for coord in set(arr):
 			swapped_tiles = np.copy(self.tiles)
 			swapped_tiles[goal_y][goal_x] = self.tiles[coord[0]][coord[1]]
