@@ -22,28 +22,41 @@ Example output
 ```.
 Enter the name of the test file: 
 board3.txt
-board is loaded!
+Board is loaded!
+Current Board: 
+2 3 5 5 
+2 3 5 5 
+0 2 4 4 
+2 0 2 2 
 (1) IDDFS (RECURSION)
 (2) IDDFS (QUEUE)
-(3) IDASTAR
+(3) IDASTAR (heuristic manhattan)
+(4) IDASTAR (heuristic misplaced)
 Choose your input(enter -1 to exit): 
 1
 ==========IDDFS (RECURSION)==========
 RESULT:
-[[2 2 2 3]
- [2 4 4 3]
- [5 5 0 2]
- [5 5 0 2]]
+[[2 2 4 4]
+ [0 0 3 2]
+ [5 5 3 2]
+ [5 5 2 2]]
 Total Moves:
-57
+49
 Total Nodes IDDFS (RECURSION) Traverse:
-312349
-0:01:53.983832
+556474
+0:03:27.723861
+
+Current Board: 
+2 3 5 5 
+2 3 5 5 
+0 2 4 4 
+2 0 2 2 
 (1) IDDFS (RECURSION)
 (2) IDDFS (QUEUE)
-(3) IDASTAR
+(3) IDASTAR (heuristic manhattan)
+(4) IDASTAR (heuristic misplaced)
 Choose your input(enter -1 to exit): 
-2
+2 
 ==========IDDFS (QUEUE)==========
 RESULT:
 [[2 2 2 3]
@@ -51,15 +64,45 @@ RESULT:
  [5 5 0 2]
  [5 5 0 2]]
 Total Moves:
-57
+49
 Total Nodes IDDFS (QUEUE) Traverse:
-315175
-0:01:53.809987
+545164
+0:03:28.527355
+
+Current Board: 
+2 3 5 5 
+2 3 5 5 
+0 2 4 4 
+2 0 2 2 
 (1) IDDFS (RECURSION)
 (2) IDDFS (QUEUE)
-(3) IDASTAR
+(3) IDASTAR (heuristic manhattan)
+(4) IDASTAR (heuristic misplaced)
 Choose your input(enter -1 to exit): 
 3
+==========IDASTAR==========
+RESULT:
+[[2 2 4 4]
+ [0 0 3 2]
+ [5 5 3 2]
+ [5 5 2 2]]
+Total Moves:
+49
+Total Nodes IDASTAR Traverse:
+522721
+0:05:58.793539
+
+Current Board: 
+2 3 5 5 
+2 3 5 5 
+0 2 4 4 
+2 0 2 2 
+(1) IDDFS (RECURSION)
+(2) IDDFS (QUEUE)
+(3) IDASTAR (heuristic manhattan)
+(4) IDASTAR (heuristic misplaced)
+Choose your input(enter -1 to exit): 
+4
 ==========IDASTAR==========
 RESULT:
 [[2 2 2 3]
@@ -67,13 +110,21 @@ RESULT:
  [5 5 0 2]
  [5 5 0 2]]
 Total Moves:
-57
+49
 Total Nodes IDASTAR Traverse:
-414070
-0:04:55.462786
+479012
+0:03:28.342669
+
+Current Board: 
+2 3 5 5 
+2 3 5 5 
+0 2 4 4 
+2 0 2 2 
 (1) IDDFS (RECURSION)
 (2) IDDFS (QUEUE)
-(3) IDASTAR
+(3) IDASTAR (heuristic manhattan)
+(4) IDASTAR (heuristic misplaced)
 Choose your input(enter -1 to exit): 
 -1
+
 ```

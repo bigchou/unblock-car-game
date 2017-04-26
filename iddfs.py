@@ -1,21 +1,21 @@
 import itertools
 
-num_nodes = 0
-visited = {}
+num_nodes = 0 # record number of nodes the algorithm traverse
+visited = {}  # store the baord the algorithm has already traversed
 
-def iddfs(root_node):
+def iddfs_queue(root_node):
 	print("="*10+"IDDFS (QUEUE)"+"="*10)
 	global num_nodes
 	num_nodes = 0
-	#return
-	for depth in itertools.count(): 
-		
+	for depth in itertools.count():
 		queue = [root_node]
 		visited = {}
+		# check all elements if the queue is not empty
 		while len(queue) > 0:
 			node = queue.pop() # get element from tail
 			visited[node.tilehash()] = node.moves
 			num_nodes+=1
+			# whether the algorithm find the goal board or not
 			if node.is_goal():
 				print("RESULT:")
 				print(node.tiles)
@@ -23,26 +23,24 @@ def iddfs(root_node):
 				print(node.moves)
 				print("Total Nodes IDDFS (QUEUE) Traverse:")
 				print(num_nodes)
-				if(node.parent):
+				if(node.parent): # show the results step by step
 					print(node.parent)
 				return
-
+			# collect all next possible boards
 			if node.moves < depth:
-				tmp = []
+				new_node_list  = []
 				for child in node.possible_moves():
 					if child.tilehash() not in visited or visited[child.tilehash()] > child.moves:
-						tmp.append(child)
-				queue.extend(tmp)
-		#print("="*10)
-
+						new_node_list.append(child)
+				queue.extend(new_node_list)
 	return
 
-def dfs(node,limit):
+def dfs(node,depth):
 	global visited
 	global num_nodes
-	#print(node.tiles)
 	visited[node.tilehash()] = node.moves
 	num_nodes += 1
+	# whether the algorithm find the goal board or not
 	if(node.is_goal()):
 		print("RESULT:")
 		print(node.tiles)
@@ -50,52 +48,26 @@ def dfs(node,limit):
 		print(node.moves)
 		print("Total Nodes IDDFS (RECURSION) Traverse:")
 		print(num_nodes)
+		if(node.parent): # show the results step by step
+			print(node.parent)
 		return node
-
-	new_node_list = []
-	if node.moves < limit:
-		
+	# collect all next possible boards
+	if node.moves < depth:
 		for child in node.possible_moves():
-
-			#if(child.tilehash() in visited):
-				#print(visited)
-
 			if child.tilehash() not in visited or visited[child.tilehash()] > child.moves:
-				"""
-				if child not in visited:
-					print("T")
-
-				try: 
-					print(visited[child.tilehash()])
-				except:
-					print("err")
-				"""
-				new_node_list.append(child)
-	
-
-
-	while new_node_list:
-		parent = new_node_list.pop(0) # get element from tail
-		ret = dfs(parent,limit)
-		#visited[node.tilehash()] = node.moves
-		if ret:
-			#visited[node.tilehash()] = node.moves
-			if ret.is_goal():
-				return ret
+				ret = dfs(child,depth) # recursive call with next node as current node for depth search
+				if ret:
+					if ret.is_goal():
+						return ret
 	return None
 
-
-
-
-def iddfs2(root_node):
+def iddfs_recursion(root_node):
 	print("="*10+"IDDFS (RECURSION)"+"="*10)
 	global num_nodes
 	global visited
 	num_nodes = 0
-	for depth in itertools.count(): 
-		#print(depth)
+	for depth in itertools.count():
 		visited = {}
 		if dfs(root_node,depth):
 			break
-		#print("="*10)
 	return
