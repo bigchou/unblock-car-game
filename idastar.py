@@ -33,8 +33,6 @@ def heuristic_manhattan(node):
 		value = abs(pos_y[i] - goal_y) + abs(pos_x[i] - goal_x)
 		if(value < minimum):
 			minimum = value
-	if(minimum <= 0 ):
-		minimum = 1
 	return minimum
 
 def search(node,g,threshold):
@@ -42,16 +40,18 @@ def search(node,g,threshold):
 	global visited
 	global mode # 0 for heuristic manhattan, 1 for heuristic misplaced
 	visited[node.tilehash()] = node.moves
-	num_nodes += 1
+	num_nodes += 1	
 	f = 0
 	if(mode == 0):
 		f = g + heuristic_manhattan(node)
 	else:
 		f = g + heuristic_misplaced(node)
+	
 	if(f > threshold):
 		return node, f
 	if(node.is_goal()):
 		return node, f
+
 	minimum = INFINITY
 	# collect all next possible boards
 	for child in node.possible_moves():
