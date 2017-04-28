@@ -10,7 +10,7 @@ class Board2:
 		self.cost = None # usage for idastar
 		self.total_cost = None # usage for idastar 
 		self.moves = moves
-		self.tiles.flags.writeable = False
+		self.tiles.flags.writeable = False # make a numpy array unwriteable
 
 	def width(self):
 		return self.tiles.shape[1]
@@ -61,7 +61,7 @@ class Board2:
 		# 1 1    3 0    4 4
 		# 0 0 or 3 0 or 0 0 ... etc.
 		if(together==True):
-			if(abs(y - ex_y) == 1):# blank_tile_1 and blank_tile_2 are perpendicular to each other
+			if(abs(y - ex_y) == 1):# blank_tile_1 is on the top of the blank_tile_2
 				# 3 0    0 3
 				# 3 0 => 0 3
 				if(x-1 >= 0):
@@ -82,7 +82,7 @@ class Board2:
 						swapped_tiles[y][x+1] = 0
 						swapped_tiles[ex_y][ex_x+1] = 0
 						result.append(Board2(swapped_tiles, node,self.moves + 1))
-			else: # blank_tile_1 and blank_tile_2 are parallel to each other
+			else: # blank_tile_1 is on the left of the blank_tile_2
 				if(y-1 >= 0):
 					# 1 1    0 0
 					# 0 0 => 1 1
@@ -192,8 +192,8 @@ class Board2:
 					swapped_tiles[y-2][x] = 0
 					result.append(Board2(swapped_tiles, node,self.moves + 1))
 
-		# *0 1 1       1 1 0
-		#  0 1 1  ==>  1 1 0
+		# *0 5 5       5 5 0
+		#  0 5 5  ==>  5 5 0
 		if(x + 2 < width and y+1 < height):
 			if(self.tiles[y+1][x] == 0 and self.tiles[y][x+1] == 5 and self.tiles[y][x+2] == 5 and self.tiles[y+1][x+1] == 5 and self.tiles[y+1][x+2] == 5):
 				swapped_tiles = np.copy(self.tiles)
@@ -204,8 +204,8 @@ class Board2:
 				swapped_tiles[y+1][x+1] = 5
 				swapped_tiles[y+1][x+2] = 0
 				result.append(Board2(swapped_tiles, node,self.moves + 1))
-		# 1 1 *0  ==>  0 1 1
-		# 1 1  0  ==>  0 1 1
+		# 5 5 *0  ==>  0 5 5
+		# 5 5  0  ==>  0 5 5
 		if(x - 2 >= 0 and y+1 < height):
 			if(self.tiles[y+1][x] == 0  and  self.tiles[y][x-1] == 5 and self.tiles[y][x-2] == 5 and  self.tiles[y+1][x-1] == 5 and self.tiles[y+1][x-2] == 5):
 				swapped_tiles = np.copy(self.tiles)
@@ -216,9 +216,9 @@ class Board2:
 				swapped_tiles[y+1][x-1] = 5
 				swapped_tiles[y+1][x-2] = 0
 				result.append(Board2(swapped_tiles, node,self.moves + 1))
-		# *0 0     1 1
-		#  1 1     1 1
-		#  1 1 ==> 0 0
+		# *0 0     5 5
+		#  5 5     5 5
+		#  5 5 ==> 0 0
 		if(y + 2 < height and x+1 < width):
 			if(self.tiles[y][x+1] == 0  and  self.tiles[y+1][x] == 5 and self.tiles[y+2][x] == 5 and  self.tiles[y+1][x+1] == 5 and self.tiles[y+2][x+1] == 5):
 				swapped_tiles = np.copy(self.tiles)
@@ -229,9 +229,9 @@ class Board2:
 				swapped_tiles[y+1][x+1] = 5
 				swapped_tiles[y+2][x+1] = 0
 				result.append(Board2(swapped_tiles, node, self.moves + 1))
-		# 1 1     0 0
-		# 1 1     1 1
-		#*0 0 ==> 1 1
+		# 5 5     0 0
+		# 5 5     5 5
+		#*0 0 ==> 5 5
 		if(y - 2 >= 0 and x+1 < width):
 			if(self.tiles[y][x+1] == 0  and  self.tiles[y-1][x] == 5 and self.tiles[y-2][x] == 5 and  self.tiles[y-1][x+1] == 5 and self.tiles[y-2][x+1] == 5):
 				swapped_tiles = np.copy(self.tiles)

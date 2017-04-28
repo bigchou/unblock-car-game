@@ -101,7 +101,8 @@ def idastar(root_node,h_mode):
 			if(node.parent): # show the results step by step
 				print(node.parent)
 			break
-		if(temp == INFINITY): # threshold larger than maximum possible f value
+		if(temp >= INFINITY): # threshold larger than maximum possible f value
+			print("Out of Search Space")
 			break
 		threshold = temp
 	return

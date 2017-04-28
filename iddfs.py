@@ -2,12 +2,17 @@ import itertools
 
 num_nodes = 0 # record number of nodes the algorithm traverse
 visited = {}  # store the baord the algorithm has already traversed
+max_depth  = 100 # maximum search depth
+
 
 def iddfs_queue(root_node):
 	print("="*10+"IDDFS (QUEUE)"+"="*10)
 	global num_nodes
 	num_nodes = 0
 	for depth in itertools.count():
+		if(depth >= max_depth):
+			print("Out of Search Space")
+			return
 		queue = [root_node]
 		visited = {}
 		# check all elements if the queue is not empty
@@ -67,6 +72,9 @@ def iddfs_recursion(root_node):
 	global visited
 	num_nodes = 0
 	for depth in itertools.count():
+		if(depth >= max_depth):
+			print("Out of Search Space")
+			break
 		visited = {}
 		if dfs(root_node,depth):
 			break
