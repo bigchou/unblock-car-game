@@ -46,24 +46,18 @@ def search(node,g,threshold):
 		f = g + heuristic_manhattan(node)
 	else:
 		f = g + heuristic_misplaced(node)
-	
 	if(f > threshold):
 		return node, f
 	if(node.is_goal()):
 		return node, f
-
 	minimum = INFINITY
 	# collect all next possible boards
 	for child in node.possible_moves():
 		if child.tilehash() not in visited or visited[child.tilehash()] > child.moves:
-			if(mode == 0):
-				child.cost = heuristic_manhattan(child)
-			else:
-				child.cost = heuristic_misplaced(child)
-			child.total_cost = child.cost + node.total_cost
-			ret, temp = search(child,child.total_cost,threshold) # recursive call with next node as current node for depth search
+			# recursive call with next node as current node for depth search
+			ret, temp = search(child,g+1,threshold)
 			if(ret.is_goal()):
-				return ret, ret.total_cost
+				return ret, temp
 			if(temp < minimum):
 				minimum = temp
 	return node, minimum
@@ -78,14 +72,13 @@ def idastar(root_node,h_mode):
 	if(np.count_nonzero(root_node.tiles == 5) > 0):
 		flag_five = True
 	num_nodes = 0
+	threshold = 0
 	if(h_mode == "manhattan"):
 		mode = 0
-		root_node.cost = heuristic_manhattan(root_node)
+		threshold = heuristic_manhattan(root_node)
 	else:
 		mode = 1
-		root_node.cost = heuristic_misplaced(root_node)
-	root_node.total_cost = 0
-	threshold = root_node.cost
+		threshold = heuristic_misplaced(root_node)
 	node = None
 	while True:
 		visited = {}

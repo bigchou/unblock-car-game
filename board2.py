@@ -7,8 +7,6 @@ class Board2:
 	def __init__(self, tiles, parent ,moves = 0):
 		self.tiles = np.array(tiles, dtype=np.int8)
 		self.parent = parent
-		self.cost = None # usage for idastar
-		self.total_cost = None # usage for idastar 
 		self.moves = moves
 		self.tiles.flags.writeable = False # make a numpy array unwriteable
 
